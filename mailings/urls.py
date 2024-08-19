@@ -1,6 +1,6 @@
 from django.urls import path
 from django.views.decorators.cache import cache_page
-
+from .views import toggle_activity
 from mailings.apps import MailingsConfig
 from mailings.views import (ClientCreateView, ClientDeleteView, ClientDetailView,
                             ClientListView, ClientUpdateView, IndexView,
