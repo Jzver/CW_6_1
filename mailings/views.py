@@ -209,6 +209,23 @@ class LogListView(ListView):
         return queryset
 
 
+def send_newsletter(newsletter):
+    """
+    Функция для отправки рассылки через email.
+    """
+    subject = newsletter.subject
+    message = newsletter.body
+    recipients = [client.email for client in newsletter.clients.all()]
+
+    send_mail(
+        subject,
+        message,
+        'jonnyskypro@yandex.ru',
+        recipients,
+        fail_silently=False,
+    )
+
+
 def toggle_activity(request, pk):
     """
     Функция для Модератора по смене активности рассылки.
