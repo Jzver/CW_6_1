@@ -141,7 +141,7 @@ class Log(models.Model):
     status = models.CharField(max_length=50, verbose_name="Статус попытки")
     server_response = models.TextField(verbose_name="Ответ сервера", **NULLABLE)
 
-    owner = models.ForeignKey(User, verbose_name="Владелец Логов", on_delete=models.CASCADE, **NULLABLE)
+    owner = models.ForeignKey(User, verbose_name="Владелец Логов", on_delete=models.CASCADE,  blank=True, null=True)
 
     class Meta:
         verbose_name = "Лог"

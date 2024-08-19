@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
@@ -225,6 +226,11 @@ def send_newsletter(newsletter):
         fail_silently=False,
     )
 
+    try:
+        send_mail(subject, message, 'from@example.com', recipients, fail_silently=False)
+        Log.objects.create(newsletter=newsletter, success=True)
+    except Exception as e:
+        Log.objects.create(newsletter=newsletter, success=False, message=str(e))
 
 def toggle_activity(request, pk):
     """
